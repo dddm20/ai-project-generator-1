@@ -1,0 +1,37 @@
+<h2>AI Chat</h2>
+
+<input id="msg" placeholder="اكتب رسالتك">
+
+<button onclick="send()">Send</button>
+
+<pre id="result"></pre>
+
+<script>
+
+async function send(){
+
+let msg=document.getElementById("msg").value
+
+let res=await fetch("/chat",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+message:msg
+
+})
+
+})
+
+let text=await res.text()
+
+document.getElementById("result").innerText=text
+
+}
+
+</script>
