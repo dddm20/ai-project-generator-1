@@ -1,23 +1,14 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ar">
 <head>
-<title>Admin Panel</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>لوحة التحكم</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
-<h2>Admin Panel</h2>
-
-<input id="user" placeholder="Username">
-
-<button onclick="activate()">Activate Subscription</button>
-
-<p id="msg"></p>
-
-<script src="script.js"></script>
-
+<h1>لوحة التحكم Admin</h1>
+<button onclick="alert(JSON.stringify(db.users,null,2))">عرض المستخدمين</button>
+<button onclick="alert(JSON.stringify(db.subscriptions,null,2))">عرض الاشتراكات</button>
+<script src="js/script.js"></script>
 </body>
-
 </html>
