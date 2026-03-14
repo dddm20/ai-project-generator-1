@@ -1,95 +1,38 @@
-/* تسجيل */
-
+// تسجيل حساب
 async function register(){
-
-let username=document.getElementById("username").value
-let password=document.getElementById("password").value
-
-let res=await fetch("/register",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-username:username,
-password:password
-
-})
-
-})
-
-let text=await res.text()
-
-document.getElementById("msg").innerText=text
-
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let res = await fetch("/register",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email,password})
+  });
+  let data = await res.json();
+  alert(data.msg);
 }
 
-/* تسجيل دخول */
-
+// تسجيل دخول
 async function login(){
-
-let username=document.getElementById("username").value
-let password=document.getElementById("password").value
-
-let res=await fetch("/login",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-username:username,
-password:password
-
-})
-
-})
-
-let text=await res.text()
-
-if(text=="success"){
-
-window.location="chat.html"
-
-}else{
-
-document.getElementById("msg").innerText="Login failed"
-
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let res = await fetch("/login",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email,password})
+  });
+  let data = await res.json();
+  if(data.success) window.location="dashboard.html";
+  else alert("خطأ في البيانات");
 }
 
-}
-
-/* تفعيل الاشتراك */
-
-async function activate(){
-
-let username=document.getElementById("user").value
-
-let res=await fetch("/activate",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-username:username
-
-})
-
-})
-
-let text=await res.text()
-
-document.getElementById("msg").innerText=text
-
+// تفعيل الاشتراك
+async function subscribe(plan){
+  let email = prompt("ادخل البريد الإلكتروني");
+  let res = await fetch("/subscribe",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email,plan})
+  });
+  let data = await res.json();
+  alert(data.msg);
 }
