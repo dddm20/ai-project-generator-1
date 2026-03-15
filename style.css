@@ -1,0 +1,8 @@
+body{font-family:Arial, sans-serif;background:#f4f4f9;margin:0;padding:0;color:#333;}
+h1,h2{color:#222;}
+a{text-decoration:none;color:#007bff;}
+input,button{padding:10px;margin:5px 0;display:block;width:100%;}
+button{background:#007bff;color:white;border:none;cursor:pointer;}
+button:hover{background:#0056b3;}
+.login-container,.register-container,.generator,.stats,.management,.subscriptions{width:90%;max-width:500px;margin:20px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+#chatBox{background:#fff;margin-bottom:10px;border-radius:5px;}

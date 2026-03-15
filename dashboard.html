@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لوحة التحكم</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>لوحة التحكم</h1>
+
+<div class="stats">
+  <h2>إحصائيات المنصة</h2>
+  <p id="usersCount"></p>
+  <p id="projectsCount"></p>
+</div>
+
+<div class="management">
+  <h2>المشاريع</h2>
+  <ul id="projectsList"></ul>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+fetch("/users").then(r=>r.json()).then(users=>{
+  document.getElementById("usersCount").innerText="عدد المستخدمين: "+users.length;
+});
+fetch("/projects").then(r=>r.json()).then(projects=>{
+  document.getElementById("projectsCount").innerText="عدد المشاريع: "+projects.length;
+  const list = document.getElementById("projectsList");
+  projects.forEach(p=>{
+    const li=document.createElement("li");
+    li.innerText=ID: ${p.id} | النوع: ${p.type} | تم الإنشاء: ${new Date(p.createdAt).toLocaleString()};
+    list.appendChild(li);
+  });
+});
+</script>
+</body>
+</html>

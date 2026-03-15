@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>إنشاء حساب</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="register-container">
+<h1>إنشاء حساب</h1>
+<form id="registerForm">
+<label>اسم المستخدم</label>
+<input type="text" id="username" required>
+<label>البريد الإلكتروني</label>
+<input type="email" id="email" required>
+<label>كلمة المرور</label>
+<input type="password" id="password" required>
+<label>تأكيد كلمة المرور</label>
+<input type="password" id="confirmPassword" required>
+<button type="submit">إنشاء الحساب</button>
+</form>
+<p>لديك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
+<div id="registerMessage"></div>
+</div>
+<script src="js/app.js"></script>
+<script>
+document.getElementById("registerForm").addEventListener("submit",function(e){
+e.preventDefault();
+const username=document.getElementById("username").value.trim();
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value.trim();
+const confirmPassword=document.getElementById("confirmPassword").value.trim();
+const msgDiv=document.getElementById("registerMessage");
+if(password!==confirmPassword){msgDiv.style.color="red";msgDiv.innerText="كلمتا المرور غير متطابقتين";return;}
+fetch("/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,email,password})})
+.then(r=>r.json()).then(data=>{
+if(data.success){msgDiv.style.color="green";msgDiv.innerText="تم إنشاء الحساب";setTimeout(()=>window.location.href="login.html",1000);}
+else{msgDiv.style.color="red";msgDiv.innerText=data.message||"حدث خطأ";}})
+.catch(err=>{msgDiv.style.color="red";msgDiv.innerText="حدث خطأ";});
+});
+</script>
+</body>
+</html>

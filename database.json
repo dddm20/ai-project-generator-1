@@ -1,0 +1,33 @@
+{
+  "users": [
+    {"username":"admin","email":"admin@example.com","password":"$2b$10$examplehashedpassword"}
+  ],
+  "projects": [
+    {"id":1,"type":"site","createdAt":"2026-03-14T00:00:00Z"},
+    {"id":2,"type":"app","createdAt":"2026-03-14T00:00:00Z"},
+    {"id":3,"type":"game","createdAt":"2026-03-14T00:00:00Z"}
+  ],
+  "subscriptions":[
+    {"userId":"admin","plan":"vip","active":true,"startedAt":"2026-03-14T00:00:00Z"}
+  ],
+  "chats":[
+    {"type":"user","message":"مرحبا"},
+    {"type":"ai","message":"مرحباً! هذه استجابة AI للمستخدم: مرحبا"}
+  ]
+}{
+  "users": [
+    {"username":"admin","email":"admin@example.com","password":"$2b$10$examplehashedpassword"}
+  ],
+  "projects": [
+    {"id":1,"type":"site","createdAt":"2026-03-14T00:00:00Z"},
+    {"id":2,"type":"app","createdAt":"2026-03-14T00:00:00Z"},
+    {"id":3,"type":"game","createdAt":"2026-03-14T00:00:00Z"}
+  ],
+  "subscriptions":[
+    {"userId":"admin","plan":"vip","active":true,"startedAt":"2026-03-14T00:00:00Z"}
+  ],
+  "chats":[
+    {"type":"user","message":"مرحبا"},
+    {"type":"ai","message":"مرحباً! هذه استجابة AI للمستخدم: مرحبا"}
+  ]
+}

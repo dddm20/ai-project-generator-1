@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>الدردشة</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>دردشة AI</h1>
+<div id="chatBox" style="border:1px solid #ccc;padding:10px;height:300px;overflow-y:scroll;"></div>
+
+<form id="chatForm">
+<input type="text" id="chatInput" placeholder="اكتب رسالتك هنا..." required>
+<button type="submit">إرسال</button>
+</form>
+
+<script src="js/app.js"></script>
+<script>
+const chatBox=document.getElementById("chatBox");
+const chatForm=document.getElementById("chatForm");
+
+function loadChats(){
+  fetch("/chats").then(r=>r.json()).then(chats=>{
+    chatBox.innerHTML="";
+    chats.forEach(c=>{
+      const div=document.createElement("div");
+      div.innerText=${c.type}: ${c.message};
+      chatBox.appendChild(div);
+    });
+    chatBox.scrollTop=chatBox.scrollHeight;
+  });
+}
+
+chatForm.addEventListener("submit",e=>{
+  e.preventDefault();
+  const msg=document.getElementById("chatInput").value.trim();
+  if(!msg) return;
+  fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg})})
+  .then(r=>r.json()).then(data=>{
+    document.getElementById("chatInput").value="";
+    loadChats();
+  });
+});
+
+loadChats();
+setInterval(loadChats,5000);
+</script>
+</body>
+</html>

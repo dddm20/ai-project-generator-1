@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تسجيل الدخول</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="login-container">
+<h1>تسجيل الدخول</h1>
+<form id="loginForm">
+<label>اسم المستخدم</label>
+<input type="text" id="username" required>
+<label>كلمة المرور</label>
+<input type="password" id="password" required>
+<button type="submit">تسجيل الدخول</button>
+</form>
+<p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب</a></p>
+<div id="loginMessage"></div>
+</div>
+<script src="js/app.js"></script>
+<script>
+document.getElementById("loginForm").addEventListener("submit",function(e){
+e.preventDefault();
+const username=document.getElementById("username").value.trim();
+const password=document.getElementById("password").value.trim();
+fetch("/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,password})})
+.then(r=>r.json()).then(data=>{
+const msgDiv=document.getElementById("loginMessage");
+if(data.success){msgDiv.style.color="green";msgDiv.innerText="تم تسجيل الدخول";setTimeout(()=>window.location.href="index.html",1000);}
+else{msgDiv.style.color="red";msgDiv.innerText="خطأ في البيانات";}}).catch(err=>{document.getElementById("loginMessage").innerText="حدث خطأ";});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>إدارة المنصة</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>إدارة المنصة</h1>
+
+<div class="stats">
+  <h2>إحصائيات المنصة</h2>
+  <p id="usersCount"></p>
+  <p id="projectsCount"></p>
+</div>
+
+<div class="subscriptions">
+  <h2>الاشتراكات</h2>
+  <ul id="subscriptionsList"></ul>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+fetch("/users").then(r=>r.json()).then(users=>{
+  document.getElementById("usersCount").innerText="عدد المستخدمين: "+users.length;
+});
+fetch("/projects").then(r=>r.json()).then(projects=>{
+  document.getElementById("projectsCount").innerText="عدد المشاريع: "+projects.length;
+});
+fetch("/subscriptions").then(r=>r.json()).then(subs=>{
+  const list = document.getElementById("subscriptionsList");
+  subs.forEach(s=>{
+    const li=document.createElement("li");
+    li.innerText=المستخدم: ${s.userId} | خطة: ${s.plan} | الحالة: ${s.active} | بدأ: ${new Date(s.startedAt).toLocaleString()};
+    list.appendChild(li);
+  });
+});
+</script>
+</body>
+</html>
